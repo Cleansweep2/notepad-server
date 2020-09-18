@@ -11,7 +11,7 @@ const router = express.Router()
 const axios = require('axios')
 const { Op } = require('sequelize')
 
-
+const sequelize = require('../core/db')
 const User = require('../models/user')
 const Category = require('../models/category')
 const Task = require('../models/task')
@@ -135,9 +135,11 @@ const user = (app) => {
   /**
    * 注销用户
    */
-  router.post('/cancellation', async (ctx) => {
-    const { uid } = ctx.body
+  router.post('/cancellation', async (req,res) => {
+    const { uid } = req.body
+
     //开启事务查询
+    //删除用户所有的信息
     return sequelize.transaction(function (t) {
       // 在这里链接您的所有查询。 确保你返回他们。
       //删除用户
@@ -151,10 +153,29 @@ const user = (app) => {
           where: {
             uid
           }
-        }, { transaction: t })
+        }, { transaction: t }).then(function () {
+          return Category.destroy({
+            where:{
+              uid
+            }
+          },{transaction:true}).then(function () {
+            return Note.destroy({
+              where:{
+                uid
+              }
+            },{transaction:t}).then(function () {
+              return Diary.destroy({
+                where:{
+                  uid
+                }
+              })
+            })
+          })
+        })
       });
     }).then(function (result) {
       // 事务已被提交
+      console.log(uid)
       res.send({
         errCode: SUCCESS,
         message: '删除成功',

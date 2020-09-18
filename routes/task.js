@@ -118,7 +118,7 @@ const task = (app) => {
     } = req.body
 
     try {
-      Task.destroy({
+      await Task.destroy({
         where: {
           id
         }

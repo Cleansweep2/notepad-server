@@ -17,8 +17,6 @@ const {
   ERROR
 } = require('../config')
 
-
-
 const category = (app) => {
 
   /**
@@ -164,8 +162,8 @@ const category = (app) => {
   
   //前面加一个验证路由,防止没有登录
   app.use('/category', verifyToken, router)
-
 }
+
 
 module.exports = category
 
