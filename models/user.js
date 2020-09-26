@@ -17,27 +17,18 @@ const User = sequelize.define("user", {
     unique: true
   },
   //昵称
-  nickname: {
-    type: DataTypes.STRING(50)
-  },
+  nickname: {type: DataTypes.STRING(50)},
   //邮箱
-  email: {
-    type: DataTypes.STRING(20)
-  },
+  email: {type: DataTypes.STRING(20)},
   //性别
-  gender: {
-    type: DataTypes.ENUM('男', '女'),
-  },
-  password: {
-    type: DataTypes.STRING(20)
-  },
+  gender: {type: DataTypes.ENUM('男', '女'),},
+  password: {type: DataTypes.STRING(20)},
   //个性签名
-  autograph: {
-    type: DataTypes.STRING(200)
-  },
+  autograph: {type: DataTypes.STRING(200)},
   //头像
   avatarUrl: {
-    type: DataTypes.STRING(300)
+    type: DataTypes.STRING(300),
+    defaultValue:"https://s1.ax1x.com/2020/09/20/w7p0fA.jpg"
   }
 });
 

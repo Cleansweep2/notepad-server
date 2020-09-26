@@ -12,5 +12,8 @@ module.exports = {
   EXI:7, //token过期
   ESISTS_USER:9, //存在此用户
   NOT_USER:8, //没有此用户
-  PORT:3001
+  PORT:3001,
+  EMAIL_NAME:'少年已老',
+  EMAIL:'c_1075529449@163.com',
+  EMAIL_PWD:'CBBEUOCKVNOLPUEM'
 }
